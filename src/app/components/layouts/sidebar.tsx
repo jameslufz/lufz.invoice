@@ -27,27 +27,30 @@ export default function Sidebar ({ activeKey }:{ activeKey: string })
     ]
 
     return  (
-        <Box bg='blue.900' w="260px" h="auto" position="fixed" top="0" left="0" className={styles['scroll-bar-wrap']}>
+        <Box bg='white' w="260px" h="auto" position="fixed" top="0" left="0" zIndex='9' className={styles['scroll-bar-wrap']} boxShadow='md'>
+            <Flex justifyContent='center' alignItems='center' w='100%' h='60px' position='sticky' top='0' bg='white' zIndex='10'>
+                <Heading as="h1" fontSize={"30px"} color="orange.400" textAlign={"center"}>INVOICE.io</Heading>
+            </Flex>
             <Flex
-                minH={'40px'}
+                minH={'60px'}
                 p={3}
+                py={5}
                 flexDirection="column"
                 overflowY="auto"
                 className={styles['scroll-box']}
                 h={'100dvh'} 
             >
-                <Heading as="h1" fontSize={"30px"} color="orange.400" mb={10} textAlign={"center"}>INVOICE.io</Heading>
 
                 <Stack>
                     <Box as={Link} href="/dashboard" style={{ textDecoration: 'none' }}>
                         <Flex
-                            bg={(activeKey === 'dashboard' ? 'facebook.400' : '')}
-                            _hover={{ bg: 'facebook.400' }}
+                            bg={(activeKey === 'dashboard' ? 'teal.300' : '')}
+                            _hover={{ bg: 'teal.300', color: 'white' }}
+                            color={(activeKey === 'dashboard' ? 'white' : 'gray.700')}
                             borderRadius={"xl"}
-                            p="5"
+                            px="3"
+                            py="5"
                             alignItems="center"
-                            color="white"
-                            fontWeight={"bold"}
                         >
                             <Icon as={FaGrip} fontSize={24} mr="3" />
                             แดชบอร์ด
@@ -55,8 +58,8 @@ export default function Sidebar ({ activeKey }:{ activeKey: string })
                     </Box>
 
                     {menus.map(({ mainMenu, subMenus }, key) => (
-                        <Stack p={5} key={key}>
-                            <Text color={"whiteAlpha.500"} fontSize={18} mb="3">{mainMenu}</Text>
+                        <Stack py='3' px='5' key={key}>
+                            <Text color={"gray.700"} fontSize={14} mb="3">{mainMenu}</Text>
                             {subMenus.map((e, i) => (
                                 <Box as={Link} href={e.url} style={{ textDecoration: 'none' }} key={i}>
                                     <Flex
@@ -64,20 +67,19 @@ export default function Sidebar ({ activeKey }:{ activeKey: string })
                                         px="6"
                                         py="4"
                                         alignItems="center"
-                                        color={(activeKey === e.activeKey ? 'white' : 'whiteAlpha.800')}
-                                        fontSize={14}
+                                        color={(activeKey === e.activeKey ? 'white' : 'gray.700')}
+                                        fontSize={12}
                                         _hover={{
-                                            bg: "blue.400",
+                                            bg: "teal.300",
                                             color: "white"
                                         }}
-                                        bg={(activeKey === e.activeKey ? 'blue.400' : '')}
+                                        bg={(activeKey === e.activeKey ? 'teal.300' : '')}
                                     >
                                         <Icon as={e.icon} mr={2} fontWeight={"bold"} />
                                         {e.name}
                                     </Flex>
                                 </Box>
                             ))}
-                            <Divider opacity="0.1" />
                         </Stack>
                     ))}
                 </Stack>
